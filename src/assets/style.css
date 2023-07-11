@@ -1,0 +1,24 @@
+.mainpage-all-a {   
+    height: 126px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.mainpage-a {
+    text-decoration: none;
+}
+.prod-contain {
+    padding: 20px;
+}
+.latest-containt {
+    background-image: url('../assets/images/game.PNG');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer {
+    height: 150px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+    color: #fff;
+    bottom: 0;
+    margin-top: 50px;
+}
