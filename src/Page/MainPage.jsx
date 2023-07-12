@@ -4,6 +4,7 @@ import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/materi
 import '../assets/style.css'
 import Footer from '../Components/Footer'
 import Products from '../Components/Products'
+import { motion } from "framer-motion"
 
 const MainPage = () => {
   return (
@@ -19,13 +20,13 @@ const MainPage = () => {
             width: '98%'
         }} className="mainpage-all-a">
             {Products.categories.map((item) => (
-                <a href='!#' className='mainpage-a'>
+                <a key={item.title} href='!#' className='mainpage-a'>
                     <div className='prod-contain' style={{textAlign: 'center'}}>
                         <div>
-                            <img style={{width: '64px'}} src={item.imgPath} alt='Product'/>
+                            <img src={item.imgPath} alt='Product'/>
                         </div>
                         <div>
-                            <span style={{color: '#000'}}>{item.title}</span>
+                            <motion.span animate={{color:'#000'}}>{item.title}</motion.span>
                         </div>
                     </div>
                 </a>
@@ -54,12 +55,12 @@ const MainPage = () => {
                 width: '98%'
             }}>
             <div className='electronic-section'>
-                <Typography gutterBottom variant="h5" component="div" sx={{paddingLeft: '20px', paddingTop: '10px'}}>
-                    <strong>Electronics</strong>
+                <Typography gutterBottom variant="h5" component="div">
+                    <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Electronics</motion.h5>
                 </Typography>
-                <div style={{display: 'flex', justifyContent: 'space-evenly', paddingTop: '20px', textAlign: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'space-evenly', paddingTop: '10px', textAlign: 'center'}}>
                     {Products.electronics.map((item) => (
-                        <Card sx={{ maxWidth: 200 }}>
+                        <Card key={item.title} sx={{ maxWidth: 200, cursor: 'pointer' }}>
                             <CardMedia
                                 sx={{ width: 200, height: 180, backgroundSize: 'contain' }}
                                 image={item.imgPath}
@@ -85,12 +86,12 @@ const MainPage = () => {
                 width: '98%'
             }}>
             <div className='toys-section'>
-                <Typography gutterBottom variant="h5" component="div" sx={{paddingLeft: '20px', paddingTop: '10px'}}>
-                    <strong>Toys</strong>
+                <Typography gutterBottom variant="h5" component="div">
+                    <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Toys</motion.h5>
                 </Typography>
-                <div style={{display: 'flex', justifyContent: 'space-evenly', paddingTop: '20px', textAlign: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'space-evenly', paddingTop: '10px', textAlign: 'center'}}>
                     {Products.toys.map((item) => (
-                        <Card sx={{ maxWidth: 200, cursor: 'pointer' }}>
+                        <Card key={item.title} sx={{ maxWidth: 200, cursor: 'pointer' }}>
                             <CardMedia
                                 sx={{ width: 200, height: 180, backgroundSize: 'contain' }}
                                 image={item.imgPath}
@@ -115,14 +116,14 @@ const MainPage = () => {
                 width: '98%'
             }}>
             <div className='Fashion-section'>
-                <Typography gutterBottom variant="h5" component="div" sx={{paddingLeft: '20px', paddingTop: '10px'}}>
-                    <strong>Fashion</strong>
+                <Typography gutterBottom variant="h5" component="div">
+                    <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Fashion</motion.h5>
                 </Typography>
                 <Grid container spacing={2} textAlign='center'>
                     <Grid item xs={4}>
                         <Grid container spacing={2} sx={{padding: '20px'}}>
                             {Products.fashions.map((item) => (
-                                <Grid item xs={6}>
+                                <Grid key={item.title} item xs={6}>
                                     <Card sx={{ maxWidth: 200 }}>
                                         <CardMedia
                                             sx={{ width: 200, height: 180, backgroundSize: 'contain' }}
