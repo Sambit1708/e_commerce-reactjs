@@ -2,7 +2,7 @@ import React from 'react'
 import NavBar from '../Components/NavBar'
 import '../assets/style.css'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardMedia, Checkbox, Divider, FormControlLabel, FormGroup, Grid, Slider, Typography } from '@mui/material'
+import { Checkbox, Divider, FormControlLabel, FormGroup, Slider } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -10,65 +10,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Products from '../Components/Products'
 import Footer from '../Components/Footer'
+import { CardItemProductPage } from '../Components/Component'
 
-
-const getDiscountPrice = (price, discount) => {
-    var oPrice = price.replaceAll(",","");
-    var discPrice = oPrice;
-    if( discount === '0' ) {
-        return price;
-    }
-    if( discount !== '0' ) {
-        discPrice = discPrice / discount
-    }
-    discPrice = oPrice - discPrice
-    var x= Math.floor(discPrice);
-    x=x.toString();
-    var lastThree = x.substring(x.length-3);
-    var otherNumbers = x.substring(0,x.length-3);
-    if(otherNumbers !== '')
-        lastThree = ',' + lastThree;
-    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return res;
-}
-
-const CardItem = (props) => (
-    <React.Fragment key={props.title}>
-        <Card key={props.title} sx={{ width: '100%', height: '250px', cursor: 'pointer', display: 'flex' }}>
-            <CardMedia
-                sx={{ width: 250, height: 180, marginTop: '20px', backgroundSize: 'contain' }}
-                image={props.imgPath}
-                title={props.title}
-            />
-            <CardContent sx={{ width: '100%' }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Typography gutterBottom variant="p" component="div">
-                            <strong style={{ fontSize: '1.1em' }}>{props.title}</strong>
-                        </Typography>
-                        <span className='rating-icon'>{props.rating} &#9733;</span>
-                        <span style={{ marginLeft: '10px', fontSize: '15px', color: 'grey' }}>128 Ratings & 21 Reviews</span>
-                        <ul>
-                            {props.highlight.split("\n").map((point) => (
-                                <li>{point}</li>
-                            ))}
-                        </ul>
-                    </Grid>
-                    <Grid item xs={6} sx={{ marginTop: '-25px', display: 'flex', flexDirection: 'column' }}>
-                        <h2 style={{marginLeft: '50px'}}>&#8377;{ getDiscountPrice(props.price, props.discount) }</h2>
-                        <div style={{ marginTop: '-30px', marginLeft: '50px', display: 'flex', alignItems: 'center'}}>
-                            <p style={{textDecoration: 'line-through', color: 'grey', marginRight: '20px'}}>
-                                &#8377;{props.price}
-                            </p>
-                            <p style={{ fontSize: '12px', color: 'green' }}>{props.discount}% off</p>
-                        </div>
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
-        <Divider />
-    </React.Fragment>
-)
 
 function valuetext(value) {
     return `${value}°C`;
@@ -171,12 +114,13 @@ const ProductPage = () => {
                     <Divider />
                     <div>
                         {Products.Mobiles.map((item) => (
-                            <CardItem   title={item.title} 
-                                        imgPath={item.imgPath} 
-                                        highlight={item.highlight}
-                                        price={item.Price}
-                                        discount={item.discount}
-                                        rating={item.rating}
+                            <CardItemProductPage   
+                                title={item.title} 
+                                imgPath={item.imgPath} 
+                                highlight={item.highlight}
+                                price={item.Price}
+                                discount={item.discount}
+                                rating={item.rating}
                             />
                         ))}
                     </div>

@@ -1,58 +1,16 @@
 import * as React from 'react'
 import NavBar from '../Components/NavBar'
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import '../assets/style.css'
 import Footer from '../Components/Footer'
 import Products from '../Components/Products'
 import { motion } from "framer-motion"
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-
-const CardItem = (props) => (
-    <Card key={props.title} sx={{ maxWidth: 200, cursor: 'pointer' }}>
-        <CardMedia
-            sx={{ width: 200, height: 180, backgroundSize: 'contain' }}
-            image={props.imgPath}
-            title={props.title}
-        />
-        <CardContent>
-            <Typography gutterBottom variant="p" component="div">
-                <strong>{props.title}</strong>
-            </Typography>
-        </CardContent>
-    </Card>
-)
+import { CardItem } from '../Components/Component'
+import Helper from '../Helper/Helper'
 
 const MainPage = () => {
-
-    const scrollRight = (event) => {
-        var classes = event.target.classList;
-        classes.forEach(element => {
-           if(element === 'electronics') {
-                var eleRight = document.querySelector(".electronics-scroll");
-                eleRight.scrollBy(350, 0)
-           }
-           if(element === 'toys') {
-                var toyRight = document.querySelector(".toys-scroll");
-                toyRight.scrollBy(350, 0)
-            }
-         });
-    }
-
-    const scrollLeft = (event) => {
-        var classes = event.target.classList;
-        classes.forEach(element => {
-           if(element === 'electronics') {
-                var eleLeft = document.querySelector(".electronics-scroll");
-                eleLeft.scrollBy(-350, 0)
-           }
-           if(element === 'toys') {
-                var toyLeft = document.querySelector(".toys-scroll");
-                toyLeft.scrollBy(-350, 0)
-            }
-         });
-    }
 
     return (
         <div>
@@ -105,7 +63,7 @@ const MainPage = () => {
                     <Typography gutterBottom variant="h5" component="div">
                         <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Electronics</motion.h5>
                     </Typography>
-                    <div className='left-icon electronics' onClick={(event) => scrollLeft(event)}>
+                    <div className='left-icon electronics' onClick={(event) => Helper.scrollLeft(event)}>
                         <ChevronLeftIcon className='icons electronics' />
                     </div>
                     <div className='card-container electronics-scroll'>
@@ -113,7 +71,7 @@ const MainPage = () => {
                             <CardItem title={item.title} imgPath={item.imgPath}/>
                         ))}
                     </div>
-                    <div className='right-icon electronics' onClick={(event) => scrollRight(event)}>
+                    <div className='right-icon electronics' onClick={(event) => Helper.scrollRight(event)}>
                         <ChevronRightIcon className='icons electronics' />
                     </div>
                 </div>
@@ -131,7 +89,7 @@ const MainPage = () => {
                     <Typography gutterBottom variant="h5" component="div">
                         <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Toys</motion.h5>
                     </Typography>
-                    <div className='left-icon toys' onClick={(event) => scrollLeft(event)}>
+                    <div className='left-icon toys' onClick={(event) => Helper.scrollLeft(event)}>
                         <ChevronLeftIcon className='icons toys' />
                     </div>
                     <div className='card-container toys-scroll' >
@@ -139,7 +97,7 @@ const MainPage = () => {
                             <CardItem title={item.title} imgPath={item.imgPath}/>
                         ))}
                     </div>
-                    <div className='right-icon toys' onClick={(event) => scrollRight(event)}>
+                    <div className='right-icon toys' onClick={(event) => Helper.scrollRight(event)}>
                         <ChevronRightIcon className='icons toys' />
                     </div>
                 </div>

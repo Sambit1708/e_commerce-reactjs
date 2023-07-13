@@ -38,7 +38,8 @@ class Products {
             Price: '69,900', 
             discount:'12', 
             highlight: '128 GB ROM\n15.49 cm (6.1 inch) Super Retina XDR Display\n12MP + 12MP | 12MP Front Camera\nA15 Bionic Chip Processor', 
-            description: 'iPhone 13. boasts an advanced dual-camera system that allows you to click mesmerising pictures with immaculate clarity. Furthermore, the lightning-fast A15 Bionic chip allows for seamless multitasking, elevating your performance to a new dimension. A big leap in battery life, a durable design, and a bright Super Retina XDR display facilitate boosting your user experience.', imgPath: require('../assets/images/Products/Mobile/iPhone13.png') 
+            description: 'iPhone 13. boasts an advanced dual-camera system that allows you to click mesmerising pictures with immaculate clarity. Furthermore, the lightning-fast A15 Bionic chip allows for seamless multitasking, elevating your performance to a new dimension. A big leap in battery life, a durable design, and a bright Super Retina XDR display facilitate boosting your user experience.',
+            imgPath: require('../assets/images/Products/Mobile/iPhone13.png') 
         },
         {   title:`APPLE iPhone 14 Pro Max (Deep Purple, 128 GB)`, 
             brand: 'Apple',
@@ -122,6 +123,28 @@ class Products {
             imgPath: require('../assets/images/Products/Mobile/AsusRog5s.png') 
         },
     ];
+
+    Generals = [
+        { title: "In The Box", value: "Handset, Adapter, USB Cable, Important Info Booklet with Warranty Card, Quick Guide, Sim Card Tool, Screen Protect Film, Case" },
+        { title: "Model Number", value: "RMX3563" },
+        { title: "Model Name", value: "GT NEO 3 (150W)" },
+        { title: "Color", value: "Sprint White" },
+        { title: "Browse Type", value: "Smartphones" },
+        { title: "SIM Type", value: "Dual Sim" },
+        { title: "Hybrid Sim Slot", value: "No" },
+        { title: "Touchscreen", value: "Yes" },
+        { title: "OTG Compatible", value: "No" }
+    ];
+
+    DisplayFeatures = [
+        { title: "Display Size", value: "17.02 cm (6.7 inch)" },
+        { title: "Resolution", value: "2412 x 1080 Pixel" },
+        { title: "Resolution Type", value: "Full HD+" },
+        { title: "GPU", value: "ARM Mali-G610 MC6" },
+        { title: "Display Type", value: "Full HD+ OLED Display" },
+        { title: "Display Colors", value: "1.07B" },
+        { title: "Other Display Features", value: "Refresh Rate: 120 Hz, Aspect Ratio: 20.1:9, Screen-to-Body Ratio: 94.20%, Screen Contrast: 5000000:1, Brightness: 500nit, Color Saturation: DCI-P3 100%, Sunlight Screen Support" }
+    ]
     
 }
 // eslint-disable-next-line import/no-anonymous-default-export

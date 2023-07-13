@@ -79,15 +79,15 @@
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19);
 }
-ul {
+.prod-ul {
     list-style: none;
 }
-li::before {
+.prod-lst::before {
     content: '\2022';
     color: grey;
     font-weight: bold;
     display: inline-block; 
-    width: 1em;
+    width: 1.2em;
     margin-left: -1em;
 }
 .rating-icon {
@@ -97,4 +97,17 @@ li::before {
     padding: 1px 5px 1px 5px;
     background-color: #009000;
     color: #fff;
+}
+.product-details {
+    background-color: #fff;
+    margin-left: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+    padding: 20px;
+}
+.product-details::-webkit-scrollbar {
+    display: none;
 }
