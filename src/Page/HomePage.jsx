@@ -17,7 +17,7 @@ const HomePage = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
                     <Typography sx={{marginBottom: 5}} component='div' variant='h2'>Home Page</Typography>
-                    <Button onClick={() => {navigate('/product')}} variant='contained' color='success' sx={{marginRight: 1}}>Explore</Button>
+                    <Button onClick={() => {navigate('/main')}} variant='contained' color='success' sx={{marginRight: 1}}>Explore</Button>
                     <Button variant='contained' color='error'>Subscribe</Button>
                 </div>
             </Box>
