@@ -1,3 +1,6 @@
+import { Avatar } from '@mui/material';
+import PeopleIcon from '@mui/icons-material/People';
+
 class Products {
     categories = [
         {title:'Grocery', imgPath: require('../assets/images/Category/grocery.png')},
@@ -145,7 +148,74 @@ class Products {
         { title: "Display Colors", value: "1.07B" },
         { title: "Other Display Features", value: "Refresh Rate: 120 Hz, Aspect Ratio: 20.1:9, Screen-to-Body Ratio: 94.20%, Screen Contrast: 5000000:1, Brightness: 500nit, Color Saturation: DCI-P3 100%, Sunlight Screen Support" }
     ]
-    
+    Updates = [
+        {
+          id: 1,
+          Name: 'Sanjay',
+          Updates: 'just changed the apple battery',
+          Avatar: (
+            <Avatar sx={{ background: 'linear-gradient(108.4deg, rgb(253, 44, 56) 3.3%, rgb(176, 2, 12) 98.4%);', boxShadow: '1px 1px 10px #888888' }} aria-label="recipe">
+              <PeopleIcon />
+            </Avatar>
+          ),
+          time: '30 minutes ago'
+        },
+        {
+          id: 2,
+          Name: 'Sanjay',
+          Updates: 'just changed the apple battery',
+          Avatar: (
+            <Avatar sx={{ background: 'linear-gradient(90deg, rgba(231,119,2,1) 0%, rgba(255,130,2,1) 43%, rgba(230,121,4,1) 100%);', boxShadow: '1px 1px 10px #888888' }} aria-label="recipe">
+              <PeopleIcon />
+            </Avatar>
+          ),
+          time: '30 minutes ago'
+        },
+        {
+          id: 3,
+          Name: 'Sanjay',
+          Updates: 'just changed the apple battery',
+          Avatar: (
+            <Avatar sx={{ background: 'linear-gradient(90deg, rgba(7,23,190,1) 0%, rgba(0,31,255,1) 42%, rgba(0,38,255,1) 100%);', boxShadow: '1px 1px 10px #888888' }} aria-label="recipe">
+              <PeopleIcon />
+            </Avatar>
+          ),
+          time: '30 minutes ago'
+        },
+        {
+          id: 4,
+          Name: 'Sanjay',
+          Updates: 'just changed the apple battery',
+          Avatar: (
+            <Avatar sx={{ background: 'linear-gradient(90deg, rgba(2,167,43,1) 0%, rgba(1,198,44,1) 42%, rgba(0,190,61,1) 100%);', boxShadow: '1px 1px 10px #888888' }} aria-label="recipe">
+              <PeopleIcon />
+            </Avatar>
+          ),
+          time: '30 minutes ago'
+        },
+      ];
+
+      
+    CategoriesDetails = [
+      { name: 'Mobiles', description: 'This is the very effective mobiles', items: 324, revenue: '24,500.00', 
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/mobiles.png')} alt='mobilr' />
+      },
+      { name: 'Fashion', description: 'This is the very effective fashion', items: 250, revenue: '35,800.00', 
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/fashion.png')} alt='fashion' />
+      },
+      { name: 'Electronics', description: 'This is the very effective electronice', items: 445, revenue: '75,000.00',
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/electronice.png')} alt='electronice' />
+      },
+      { name: 'Furniture', description: 'This is the very effective Furniture', items: 275, revenue: '67,000.00',
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/Furniture.png')} alt='Furniture' />
+      },
+      { name: 'Toys', description: 'This is the very effective toys', items: 460, revenue: '49,000.00',
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/toys.png')} alt='toys' />
+      },
+      { name: 'Grocery', description: 'This is the very effective Grocery', items: 460, revenue: '32,000.00',
+        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/grocery.png')} alt='Grocery' />
+      },
+    ];
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Products();

@@ -1,7 +1,6 @@
 
 class Helper {
     getDiscountPrice = (price, discount) => {
-        console.log("Hello ==> "+price)
         var oPrice = price.replaceAll(",","");
         var discPrice = oPrice;
         if( discount === '0' ) {

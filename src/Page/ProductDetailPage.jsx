@@ -52,33 +52,6 @@ const ProductDetailPage = () => {
 
   const open = Boolean(anchorEl);
 
-  const scrollRight = (event) => {
-    var classes = event.target.classList;
-    classes.forEach(element => {
-       if(element === 'electronics') {
-            var eleRight = document.querySelector(".electronics-scroll");
-            eleRight.scrollBy(350, 0)
-       }
-       if(element === 'toys') {
-            var toyRight = document.querySelector(".toys-scroll");
-            toyRight.scrollBy(350, 0)
-        }
-     });
-}
-
-const scrollLeft = (event) => {
-    var classes = event.target.classList;
-    classes.forEach(element => {
-       if(element === 'electronics') {
-            var eleLeft = document.querySelector(".electronics-scroll");
-            eleLeft.scrollBy(-350, 0)
-       }
-       if(element === 'toys') {
-            var toyLeft = document.querySelector(".toys-scroll");
-            toyLeft.scrollBy(-350, 0)
-        }
-     });
-}
   return (
     <div>
         <NavBar />
@@ -195,6 +168,9 @@ const scrollLeft = (event) => {
                 {Products.Mobiles[2].description}
               </Typography>
             </div>
+
+            {/* Specification */}
+            
             <div className='spec-content' style={{  padding:'40px 20px 20px 20px' }}>
               <Typography variant='h5' component='div' style={{ border: '1px solid #D3D3D3', padding: '20px', borderBottom: 'none' }}>
                 Specifications
@@ -236,7 +212,7 @@ const scrollLeft = (event) => {
               <Typography gutterBottom variant="h5" component="div">
                   <motion.h5 animate={{fontSize: '1em', x:20, y:5}}>Similar Products</motion.h5>
               </Typography>
-              <div className='left-icon electronics' onClick={(event) => scrollLeft(event)}>
+              <div className='left-icon electronics' onClick={(event) => Helper.scrollLeft(event)}>
                   <ChevronLeftIcon className='icons electronics' />
               </div>
               <div className='card-container electronics-scroll' style={{marginTop: '-30px'}}>
@@ -244,7 +220,7 @@ const scrollLeft = (event) => {
                       <CardItem title={item.title} imgPath={item.imgPath}/>
                   ))}
               </div>
-              <div className='right-icon electronics' onClick={(event) => scrollRight(event)}>
+              <div className='right-icon electronics' onClick={(event) => Helper.scrollRight(event)}>
                   <ChevronRightIcon className='icons electronics' />
               </div>
           </div>
