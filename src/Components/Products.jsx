@@ -198,22 +198,55 @@ class Products {
       
     CategoriesDetails = [
       { name: 'Mobiles', description: 'This is the very effective mobiles', items: 324, revenue: '24,500.00', 
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/mobiles.png')} alt='mobilr' />
+        Avatar: require('../assets/images/Category/mobiles.png')
       },
       { name: 'Fashion', description: 'This is the very effective fashion', items: 250, revenue: '35,800.00', 
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/fashion.png')} alt='fashion' />
+        Avatar: require('../assets/images/Category/fashion.png')
       },
       { name: 'Electronics', description: 'This is the very effective electronice', items: 445, revenue: '75,000.00',
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/electronice.png')} alt='electronice' />
+        Avatar: require('../assets/images/Category/electronice.png')
       },
       { name: 'Furniture', description: 'This is the very effective Furniture', items: 275, revenue: '67,000.00',
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/Furniture.png')} alt='Furniture' />
+        Avatar: require('../assets/images/Category/Furniture.png')
       },
       { name: 'Toys', description: 'This is the very effective toys', items: 460, revenue: '49,000.00',
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/toys.png')} alt='toys' />
+        Avatar: require('../assets/images/Category/toys.png')
       },
       { name: 'Grocery', description: 'This is the very effective Grocery', items: 460, revenue: '32,000.00',
-        Avatar: <img style={{width: '45px'}} src={require('../assets/images/Category/grocery.png')} alt='Grocery' />
+        Avatar: require('../assets/images/Category/grocery.png')
+      },
+    ];
+
+    Brands = [
+      {
+        title: 'Apple',
+        description: `Apple was founded as Apple Computer Company on April 1, 1976, by Steve Wozniak, Steve Jobs (1955–2011) and Ronald Wayne to develop and sell Wozniak's Apple I personal computer. It was incorporated by Jobs and Wozniak as Apple Computer, Inc. in 1977. The company's second computer, the Apple II, became a best seller and one of the first mass-produced microcomputers. Apple went public in 1980 to instant financial success. The company developed computers featuring innovative graphical user interfaces, including the 1984 original Macintosh, announced that year in a critically acclaimed advertisement called "1984". By 1985, the high cost of its products, and power struggles between executives, caused problems. Wozniak stepped back from Apple and pursued other ventures, while Jobs resigned and founded NeXT, taking some Apple employees with him.`,
+        items: 200,
+        imgpath: require('../assets/images/Brands/apple.png')
+      },
+      {
+        title: 'Realme',
+        description: `Realme is a Chinese consumer electronics manufacturer based in Shenzhen, Guangdong. It was founded by Li Bingzhong on May 4, 2018, who was a former vice president of Oppo. Starting originally as a sub-brand of Oppo, Realme eventually ventured as its own brand.`,
+        items: 200,
+        imgpath: require('../assets/images/Brands/realme.jpg')
+      },
+      {
+        title: 'Xiaomi',
+        description: `Xiaomi was founded in 2010 in Beijing by now multi-billionaire Lei Jun when he was 40 years old, along with six senior associates. Lei had founded Kingsoft as well as Joyo.com, which he sold to Amazon for $75 million in 2004. In August 2011, Xiaomi released its first smartphone and, by 2014, it had the largest market share of smartphones sold in China. Initially the company only sold its products online; however, it later opened brick and mortar stores`,
+        items: 200,
+        imgpath: require('../assets/images/Brands/xiaomi.png')
+      },
+      {
+        title: 'Asus',
+        description: `Asus is the world's 5th-largest PC vendor by unit sales as of January 2023. Asus appears in BusinessWeek's "InfoTech 100" and "Asia's Top 10 IT Companies" rankings, and it ranked first in the IT Hardware category of the 2008 Taiwan Top 10 Global Brands survey with a total brand value of $1.3 billion.`,
+        items: 200,
+        imgpath: require('../assets/images/Brands/asus.png')
+      },
+      {
+        title: 'Samsung',
+        description: `Samsung was founded by Lee Byung-chul in 1938 as a trading company. Over the next three decades, the group diversified into areas including food processing, textiles, insurance, securities, and retail. Samsung entered the electronics industry in the late 1960s and the construction and shipbuilding industries in the mid-1970s; these areas would drive its subsequent growth. Following Lee's death in 1987, Samsung was separated into five business groups – Samsung Group, Shinsegae Group, CJ Group and Hansol Group, and JoongAng Group.`,
+        items: 200,
+        imgpath: require('../assets/images/Brands/samsung.png')
       },
     ];
 }

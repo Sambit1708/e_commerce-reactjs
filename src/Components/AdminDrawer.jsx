@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const drawerItem = [
   { text: 'Dashboard', icon: <PaletteIcon />, path: '/admin' },
   { text: 'Category', icon: <CategorryIcon />, path: '/admin/category' },
-  { text: 'Brand', icon: <AutoAwesomeMosaicIcon />, path: '/admin' },
+  { text: 'Brand', icon: <AutoAwesomeMosaicIcon />, path: '/admin/brand' },
   { text: 'Product', icon: <AddShoppingCartIcon />, path: '/admin' },
 ]
 

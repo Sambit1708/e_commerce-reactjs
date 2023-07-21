@@ -10,9 +10,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar, Button, Modal, TableFooter, TablePagination, TextField, Typography } from '@mui/material';
+import { Avatar, Button, Modal, TablePagination, TextField, Typography } from '@mui/material';
 import Products from '../../../Components/Products';
 import PeopleIcon from '@mui/icons-material/People';
+import DrawerHeader from '../../../Components/Common/CommonComponent';
 
 
 
@@ -36,16 +37,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-}));
 
 const style = {
     position: 'absolute',
@@ -131,7 +122,12 @@ const Category = () => {
                             : Products.CategoriesDetails  
                             ).map((row) => (
                                 <StyledTableRow key={row.name}>
-                                    <StyledTableCell>{row.Avatar}</StyledTableCell>
+                                    <StyledTableCell>
+                                        <img    alt={row.name} 
+                                                style={{width: '45px'}} 
+                                                src={row.Avatar} 
+                                        />
+                                    </StyledTableCell>
                                     <StyledTableCell>
                                         {row.name}
                                     </StyledTableCell>
@@ -141,51 +137,46 @@ const Category = () => {
                                 </StyledTableRow>
                         ))}
                         </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25, 100]}
-                                    component="div"
-                                    count={Products.CategoriesDetails.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
-                                />
-                            </TableRow>
-                        </TableFooter>
                     </Table>
                 </TableContainer>
-                <div style={{textAlign: 'right', marginTop: '20px'}}>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, 100]}
+                    component="div"
+                    count={Products.CategoriesDetails.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+                <div>
                     <Button onClick={handleAddCategoryOpen} variant='contained' color='error'>Add Category</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleAddCategoryClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2" textTransform='uppercase' >
-                                    Add Category
-                                </Typography>
-                                <form onSubmit={(event) => submitCategory(event)} ref={formRef} id="modal-modal-description" style={{ marginTop: '20px' }} encType='multipart/form-data' >
-                                    <TextField id="outlined-basic" fullWidth  label="Name" variant="outlined" name='cName' />
-                                    <TextField id="outlined-multiline-static" fullWidth label="Description" multiline rows={4} sx={{mt: '20px'}}  name='cDescription' />
-                                    <div class="mb-3 mt-3 d-flex">
-                                        <Avatar alt="Remy Sharp" src={img.placeholder} />
-                                        <input class="form-control ms-2" accept='image/*' type="file" id="formFile" name='cFile' onChange={handleChangeFile} />
-                                    </div>
-                                    <div style={{textAlign: 'center'}}>
-                                        <Button type='submit' variant='contained' color='success' sx={{ mr: 5 }}>Submit</Button>
-                                        <Button variant='contained' onClick={handleAddCategoryClose} color='error'>Cancel</Button>
-                                    </div>
-                                </form>
-                            </Box>
-                        </Modal>
+                    <Modal
+                        open={open}
+                        onClose={handleAddCategoryClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2" textTransform='uppercase' >
+                                Add Category
+                            </Typography>
+                            <form onSubmit={(event) => submitCategory(event)} ref={formRef} id="modal-modal-description" style={{ marginTop: '20px' }} encType='multipart/form-data' >
+                                <TextField id="outlined-basic" fullWidth  label="Name" variant="outlined" name='cName' />
+                                <TextField id="outlined-multiline-static" fullWidth label="Description" multiline rows={4} sx={{mt: '20px'}}  name='cDescription' />
+                                <div class="mb-3 mt-3 d-flex">
+                                    <Avatar alt="Remy Sharp" src={img.placeholder} />
+                                    <input class="form-control ms-2" accept='image/*' type="file" id="formFile" name='cFile' onChange={handleChangeFile} />
+                                </div>
+                                <div style={{textAlign: 'center'}}>
+                                    <Button type='submit' variant='contained' color='success' sx={{ mr: 5 }}>Submit</Button>
+                                    <Button variant='contained' onClick={handleAddCategoryClose} color='error'>Cancel</Button>
+                                </div>
+                            </form>
+                        </Box>
+                    </Modal>
                 </div>
             </Box>
         </Box>
-        
     )
 }
 

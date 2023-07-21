@@ -6,6 +6,8 @@ import ProductPage from './Page/ProductPage';
 import ProductDetailPage from './Page/ProductDetailPage';
 import AdminHomePage from './Page/Admin/AdminHomePage';
 import Category from './Page/Admin/Category/Category';
+import BrandPage from './Page/Admin/Brand/BrandPage';
+import BrandDetails from './Page/Admin/Brand/BrandDetails';
 
 
 function App() {
@@ -23,6 +25,10 @@ function App() {
             <Route path='admin'>
               <Route index element={<AdminHomePage />}></Route>
               <Route path='category' element={<Category />}></Route>
+              <Route path='brand'>
+                <Route index element={<BrandPage />}></Route>
+                <Route path='details' element={<BrandDetails />}></Route>
+              </Route>
             </Route>
           </Route>
         </Routes>
