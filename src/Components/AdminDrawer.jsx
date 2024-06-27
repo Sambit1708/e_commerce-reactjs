@@ -8,17 +8,20 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CategorryIcon from '@mui/icons-material/Category';
-import AutoAwesomeMosaicIcon from '@mui/icons-material/AutoAwesomeMosaic';
 import PaletteIcon from '@mui/icons-material/Palette';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useNavigate } from 'react-router-dom'
+import { MdOutlineMenuOpen } from "react-icons/md";
+import { TbBrandDatabricks } from "react-icons/tb";
+import { FaDatabase } from "react-icons/fa";
+import { Avatar, Badge, Box } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+
 
 
 const drawerWidth = 240;
@@ -91,9 +94,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const drawerItem = [
   { text: 'Dashboard', icon: <PaletteIcon />, path: '/admin' },
-  { text: 'Category', icon: <CategorryIcon />, path: '/admin/category' },
-  { text: 'Brand', icon: <AutoAwesomeMosaicIcon />, path: '/admin/brand' },
-  { text: 'Product', icon: <AddShoppingCartIcon />, path: '/admin' },
+  { text: 'Brand', icon: <TbBrandDatabricks  size={25} />, path: '/admin/brand' },
+  { text: 'Product', icon: <FaDatabase />, path: '/admin/product' },
+  { text: 'Order', icon: <AddShoppingCartIcon />, path: '/admin/order' },
 ]
 
 
@@ -101,7 +104,7 @@ const drawerItem = [
 const AdminDrawer = () => {
     const theme = useTheme();
     const navigate = useNavigate()
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -117,59 +120,73 @@ const AdminDrawer = () => {
 
     return (
         <React.Fragment>
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open} sx={{bgcolor: "white"}}>
                 <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                    sx={{
-                    marginRight: 5,
-                    ...(open && { display: 'none' }),
-                    }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Mini variant drawer
-                </Typography>
+                  <IconButton
+                      color="black"
+                      aria-label="open drawer"
+                      onClick={handleDrawerOpen}
+                      edge="start"
+                      sx={{
+                        marginRight: 5,
+                        ...(open && { display: 'none' }),
+                      }}
+                  >
+                      <MenuIcon />
+                  </IconButton>
+                  <Box sx={{ position: "fixed", right: 25 }}>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Box sx={{mr: 2}}>
+                        <Badge badgeContent={4} color="error">
+                          <NotificationsIcon color="action" />
+                        </Badge>
+                      </Box>
+                      <Box sx={{ display: "flex" }}>
+                        <Avatar alt='R' src={require('../Assets/images/user.png')} />
+                        <Box sx={{ml: 1}}>
+                          <Typography color="black" fontFamily="poppins" fontSize="14px" fontWeight="500">Sambit Khandai</Typography>
+                          <Typography color="black" fontFamily="poppins" fontSize="12px">sam@gmail.com</Typography>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
                 </Toolbar>
             </AppBar>
-            <Drawer variant="permanent" open={open}>
+            <Drawer variant="permanent" open={open} PaperProps={{ sx: { backgroundColor: "#001529", color: "#fff" } }}>
                 <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                </IconButton>
+                  <IconButton onClick={handleDrawerClose}>
+                      {theme.direction === 'rtl' ? <ChevronRightIcon /> : <MdOutlineMenuOpen  style={{color:'white'}} />}
+                  </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider sx={{ borderColor: "#fff" }} />
                 <List>
-                {drawerItem.map((item, index) => (
-                    <React.Fragment>
-                    <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}
-                        onClick={() => navigates(item.path)}
-                        >
-                        <ListItemIcon
+                  {drawerItem.map((item, index) => (
+                    <React.Fragment key={index}>
+                      <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                          <ListItemButton
                             sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
                             }}
-                        >
-                            {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <Divider />
+                            onClick={() => navigates(item.path)}
+                          >
+                          <ListItemIcon
+                            sx={{
+                              color: "inherit",
+                              minWidth: 0,
+                              mr: open ? 3 : 'auto',
+                              justifyContent: 'center',
+                            }}
+                          >
+                              {item.icon}
+                          </ListItemIcon>
+                          <ListItemText primary={<Typography fontFamily="poppins">{item.text}</Typography>} sx={{ opacity: open ? 1 : 0 }} />
+                          </ListItemButton>
+                      </ListItem>
+                      {/* <Divider sx={{ borderColor: "#fff" }} /> */}
                     </React.Fragment>
-                ))}
+                  ))}
                 </List>
             </Drawer>
         </React.Fragment>

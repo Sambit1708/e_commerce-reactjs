@@ -1,154 +1,273 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import { Avatar, Card, CardContent, CardHeader, Grid } from '@mui/material';
-import PeopleIcon from '@mui/icons-material/People';
-import CategoryIcon from '@mui/icons-material/Category';
-import LayersIcon from '@mui/icons-material/Layers';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { DataGrid } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
-import Products from '../../Components/Products';
+import { Box, CssBaseline, Typography, Card, CardContent, CardHeader, Grid, Paper, IconButton } from '@mui/material';
+import { FaArrowTrendUp, FaArrowTrendDown  } from "react-icons/fa6";
 import AdminDrawer from '../../Components/AdminDrawer';
-import DrawerHeader from '../../Components/Common/CommonComponent';
+import { DrawerHeader, tablePaginationStyle } from '../../Components/Common/CommonComponent';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { DemoColumn, DemoPie } from '../../Components/Common/CommonComponent'
 
+function createData(no, status, Customer, Date, Total) {
+  return { no, status, Customer, Date, Total };
+}
+
+const rows = [
+  createData("#001", "Pending", "Sambit Khandai", "2023-08-23", 512),
+  createData("#002", "Pending", "Sambit Khandai", "2023-08-23", 512),
+  createData("#003", "Canceled", "Sambit Khandai", "2023-08-23", 512),
+  createData("#004", "Compeleted", "Sambit Khandai", "2023-08-23", 512),
+  createData("#005", "Pending", "Sambit Khandai", "2023-08-23", 512),
+];
+
+const recentUsers = [
+  {
+    user: "Sambit Khandai",
+    order: 4
+  },
+  {
+    user: "Madhu Sahoo",
+    order: 2
+  },
+  {
+    user: "Manish Pal",
+    order: 12
+  },
+  {
+    user: "Virat Kohli",
+    order: 24
+  },
+  {
+    user: "Happy Sahoo",
+    order: 8
+  },
+]
+
+const pendingStyle = {
+  padding: 3,
+  paddingLeft: 5,
+  paddingRight: 5,
+  width: "fit-content",
+  backgroundColor: "rgba(0, 150, 199, 0.2)",
+  color: "blue",
+  fontFamily: "poppins",
+  fontWeight: "500",
+  fontSize: "10px"
+}
+const canceledStyle = {
+  padding: 3,
+  paddingLeft: 5,
+  paddingRight: 5,
+  width: "fit-content",
+  backgroundColor: "rgba(215, 0, 64, 0.2)",
+  color: "red",
+  fontFamily: "poppins",
+  fontWeight: "500",
+  fontSize: "10px"
+}
+const compeletedStyle = {
+  padding: 3,
+  width: "fit-content",
+  paddingLeft: 5,
+  paddingRight: 5,
+  backgroundColor: "rgba(31, 214, 85, 0.2)",
+  color: "green",
+  fontFamily: "poppins",
+  fontWeight: "500",
+  fontSize: "10px"
+}
 
 const AdminHomePage = () => {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const { data } = useDemoData({
-    dataSet: 'Employee',
-    rowLength: 5,
-    maxColumns: 6,
-  });
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const DashboardHeaderCard = (props) => {
+
+    const { title, mainText, date, type, typeValue, transition } = props;
+
+    return (
+      <Card sx={{ maxWidth: 350 }}>
+        <CardHeader
+          subheader={<Typography color='gray' fontFamily="poppins">{title}</Typography>}
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+        />
+        <CardContent sx={{mt:-3}}>
+          <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+            <Typography fontFamily="poppins" fontSize="24px" fontWeight="500">
+              {transition ? <React.Fragment>&#8377; {mainText}</React.Fragment> : mainText}
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", textAlign: "right" }}>
+              <Typography fontSize="11px" fontFamily="poppins" color={type==="Profit" ? "green" : "red"} fontWeight="600">
+                { type === 'Profit' ? <FaArrowTrendUp /> : <FaArrowTrendDown /> } {typeValue}%
+              </Typography>
+              <Typography fontSize="11px" fontFamily="poppins" color="gray">
+                Compared to {date}
+              </Typography>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  const classes = tablePaginationStyle();
 
   return (
     <Box sx={{ display: 'flex', backgroundColor: '#f5f5f5' }}>
       <CssBaseline />
       <AdminDrawer />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, minHeight: "645px" }}>
         <DrawerHeader />
         <Box>
-          <Grid container spacing={2} >
-            <Grid item xs={3}>
-              <Card sx={{ maxWidth: 240 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ width: '45px', height: '45px', background: 'linear-gradient(108.4deg, rgb(253, 44, 56) 3.3%, rgb(176, 2, 12) 98.4%);', boxShadow: '1px 1px 10px #888888' }} aria-label="recipe">
-                      <PeopleIcon />
-                    </Avatar>
-                  }
-                />
-                <CardContent sx={{position: 'relative'}}>
-                  <div style={{position: 'absolute', top: '-60px', left: '120px'}}>
-                    <Typography color='text.secondary' textTransform='uppercase' sx={{ fontSize: '1.2em', letterSpacing: 1 }}>
-                      Users
-                    </Typography>
-                    <span style={{fontSize: '1em', fontWeight: '900'}}>150+</span>
-                  </div>
-                  <Typography color="text.secondary" sx={{ fontSize: '12px', marginTop: '12px', display: 'flex', alignItems: 'center' }} >
-                    <span>increase in products</span>&nbsp;<span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'center' }} ><span>5%</span><ArrowDropDownIcon /></span>
-                  </Typography>
-                </CardContent>
-              </Card>
+          <Typography fontFamily="poppins" fontWeight="bold" fontSize="24px">Dashboard</Typography>
+          <Box sx={{ mt: 2 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <DashboardHeaderCard title="Total sells" mainText="37000" date="April 2023" 
+                                     type="Profit" typeValue="34.7" transition={true} />
+              </Grid>
+              <Grid item xs={4}>
+                <DashboardHeaderCard title="Average order value" mainText="900" date="April 2023" 
+                                     type="loss" typeValue="14.0" transition={true} />
+              </Grid>
+              <Grid item xs={4}>
+                <DashboardHeaderCard title="Total orders" mainText="500" date="April 2023" 
+                                     type="Profit" typeValue="27.9" transition={false} />
+              </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <Card sx={{ maxWidth: 230 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ width: '45px', height: '45px', background: 'linear-gradient(90deg, rgba(231,119,2,1) 0%, rgba(255,130,2,1) 43%, rgba(230,121,4,1) 100%);', boxShadow: '1px 1px 7px #888888'  }} aria-label="recipe">
-                      <CategoryIcon />
-                    </Avatar>
-                  }
-                />
-                <CardContent sx={{position: 'relative'}}>
-                  <div style={{position: 'absolute', top: '-60px', left: '100px'}}>
-                    <Typography color='text.secondary' textTransform='uppercase' sx={{ fontSize: '1.1em', letterSpacing: 1 }}>
-                      Products
-                    </Typography>
-                    <span style={{fontSize: '1em', fontWeight: '900'}}>150+</span>
-                  </div>
-                  <Typography color="text.secondary" sx={{ fontSize: '12px', marginTop: '12px', display: 'flex', alignItems: 'center' }} >
-                    <span>increase in products</span>&nbsp;<span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'center' }} ><span>5%</span><ArrowDropUpIcon /></span>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={3}>
-              <Card sx={{ maxWidth: 240 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ width: '45px', height: '45px', background: 'linear-gradient(90deg, rgba(7,23,190,1) 0%, rgba(0,31,255,1) 42%, rgba(0,38,255,1) 100%);', boxShadow: '1px 1px 7px #888888'  }} aria-label="recipe">
-                      <LayersIcon />
-                    </Avatar>
-                  }
-                />
-                <CardContent sx={{position: 'relative'}}>
-                  <div style={{position: 'absolute', top: '-60px', left: '120px'}}>
-                    <Typography color='text.secondary' textTransform='uppercase' sx={{ fontSize: '1.2em', letterSpacing: 1 }}>
-                      Brands
-                    </Typography>
-                    <span style={{fontSize: '1em', fontWeight: '900'}}>150+</span>
-                  </div>
-                  <Typography color="text.secondary" sx={{ fontSize: '12px', marginTop: '12px', display: 'flex', alignItems: 'center' }} >
-                    <span>increase in products</span>&nbsp;<span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'center' }} ><span>5%</span><ArrowDropUpIcon /></span>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={3}>
-              <Card sx={{ maxWidth: 240 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ width: '45px', height: '45px', background: 'linear-gradient(90deg, rgba(2,167,43,1) 0%, rgba(1,198,44,1) 42%, rgba(0,190,61,1) 100%);', boxShadow: '1px 1px 7px #888888'  }} aria-label="recipe">
-                      <CurrencyRupeeIcon />
-                    </Avatar>
-                  }
-                />
-                <CardContent sx={{position: 'relative'}}>
-                  <div style={{position: 'absolute', top: '-60px', left: '100px'}}>
-                    <Typography color='text.secondary' textTransform='uppercase' sx={{ fontSize: '1.2em', letterSpacing: 1 }}>
-                      Earning
-                    </Typography>
-                    <span style={{fontSize: '1em', fontWeight: '900'}}>&#x20B9;7,828.00</span>
-                  </div>
-                  <Typography color="text.secondary" sx={{ fontSize: '12px', marginTop: '12px', display: 'flex', alignItems: 'center' }} >
-                    <span>increase in products</span>&nbsp;<span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'center' }} ><span>5%</span><ArrowDropDownIcon /></span>
-                  </Typography>
-                  <LayersIcon sx={{ position: 'absolute', color: 'rgba(255, 255, 255, 0.5)', fontSize: '5em', top: '20px', left: '120px' }} />
-                </CardContent>
-              </Card>
-            </Grid> 
-          </Grid>
-          <Grid container spacing={2} >
-            <Grid item xs={8}>
-              <h3>Recent Orders</h3>
-              <div style={{ height: 350, width: '100%', backgroundColor: '#fff' }}>
-                <DataGrid {...data} />
-              </div>
-            </Grid>
-            <Grid item xs={4}>
-              <h3>Updates</h3>
-              <div style={{ height: 350, width: '350px', backgroundColor: '#fff', boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)', borderRadius: '4px' }}>
-                <div style={{ height: '90%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '20px' }} >
-                  {Products.Updates.map((item) => (
-                    <React.Fragment>
-                      <div style={{ display: 'flex', marginTop: '15px' }}>
-                        <div style={{marginRight: '20px'}}>{item.Avatar }</div>
-                        <div><b>{item.Name}</b> <span >{item.Updates}</span></div>
-                      </div>
-                      <div style={{ color: 'grey', fontSize: '13px', marginLeft: 60 }}>{item.time}</div>
-                      <Divider />
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-            </Grid>
-          </Grid>
+            <Box sx={{mt: 2}}>
+              <Grid container spacing={2}>
+                <Grid item xs={4}>
+                  <Card>
+                    <CardHeader
+                      title={<Box component='h6' >Active Users</Box>}
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                    />
+                    <Box sx={{ bgcolor: "rgba(31, 81, 255, 0.3)", width: "280px", height: "80px", 
+                                color: "blue", textAlign: "center", ml: "auto", mr: "auto" }}>
+                      <p style={{ fontWeight: 500, fontSize: "24px", paddingTop: "25px" }}>150</p>
+                    </Box>
+                    <CardContent>
+                      <Typography fontFamily="poppins">Recent Users</Typography>
+                      <TableContainer sx={{ width: "90%", mt: 1 }}>
+                        <Table size='small'>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell sx={{ fontFamily: "poppins" }} align="left">Name</TableCell>
+                              <TableCell sx={{ fontFamily: "poppins" }} align="right">Orders</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {recentUsers.map((item, index) => (
+                              <TableRow key={index}>
+                                <TableCell sx={{ fontFamily: "poppins" }} align="left">{item.user}</TableCell>
+                                <TableCell sx={{ fontFamily: "poppins" }} align="right">{item.order}</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={8}>
+                  <Card>
+                    <CardHeader 
+                      title={<Box component='h6' >Income Statistics</Box>}
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                    />
+                    <DemoColumn />
+                  </Card>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} sx={{mt: 2}} >
+                <Grid item xs={8}>
+                  <Paper sx={{ width: '100%' }}>
+                    <Box component='h6' sx={{p: 2}}>Recent Orders</Box>
+                    <TableContainer sx={{ maxHeight: 650 }}>
+                      <Table  stickyHeader aria-label="sticky table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell sx={{ fontWeight: "bold", fontFamily: "poppins" }} align='left'>No</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", fontFamily: "poppins" }} align="left">Status</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", fontFamily: "poppins" }} align="left">Customer</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", fontFamily: "poppins" }} align="left">Date</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", fontFamily: "poppins" }} align="left">Total</TableCell>
+                            <TableCell></TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {rows.map((row) => (
+                            <TableRow key={row.no}>
+                              <TableCell></TableCell>
+                              <TableCell sx={{ fontFamily: "poppins" }} align="left" component="th" scope="row">
+                                {row.no}
+                              </TableCell>
+                              <TableCell align="left"><div style={row.status === 'Pending' ? pendingStyle : (row.status === 'Canceled') ? canceledStyle : compeletedStyle}>{row.status}</div></TableCell>
+                              <TableCell sx={{ fontFamily: "poppins" }} align="left">{row.Customer}</TableCell>
+                              <TableCell sx={{ fontFamily: "poppins" }} align="left">{row.Date}</TableCell>
+                              <TableCell sx={{ fontFamily: "poppins", fontWeight: "500" }} align="left">&#8377; {row.Total}</TableCell>
+                              <TableCell></TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 20]}
+                      component="div"
+                      count={rows.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                      classes={{
+                        toolbar: classes.toolbar,
+                        caption: classes.caption
+                      }}
+                    />
+                  </Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  <Card>
+                    <CardHeader
+                      title={<Typography fontWeight="500" color='black' fontFamily="poppins">Sales per Brand</Typography>}
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                    />
+                    <CardContent>
+                      <DemoPie />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>

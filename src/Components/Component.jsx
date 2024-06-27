@@ -29,19 +29,19 @@ const CardItemProductPage = (props) => (
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Typography gutterBottom variant="p" component="div">
-                            <strong style={{ fontSize: '1.1em' }}>{props.title}</strong>
+                            <strong style={{ fontSize: '1em' }}>{props.title}</strong>
                         </Typography>
                         <span className='rating-icon'>{props.rating} &#9733;</span>
                         <span style={{ marginLeft: '10px', fontSize: '15px', color: 'grey' }}>128 Ratings & 21 Reviews</span>
                         <ul className='prod-ul'>
                             {props.highlight.split("\n").map((point) => (
-                                <li className='prod-lst'>{point}</li>
+                                <li style={{fontSize: '13px'}} className='prod-lst'>{point}</li>
                             ))}
                         </ul>
                     </Grid>
-                    <Grid item xs={6} sx={{ marginTop: '-25px', display: 'flex', flexDirection: 'column' }}>
-                        <h2 style={{marginLeft: '50px'}}>&#8377;{ Helper.getDiscountPrice(props.price, props.discount) }</h2>
-                        <div style={{ marginTop: '-30px', marginLeft: '50px', display: 'flex', alignItems: 'center'}}>
+                    <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+                        <h4 style={{marginLeft: '50px', fontSize: '1.2em'}}>&#8377;{ Helper.getDiscountPrice(props.price, props.discount) }</h4>
+                        <div style={{  marginLeft: '50px', display: 'flex', alignItems: 'center'}}>
                             <p style={{textDecoration: 'line-through', color: 'grey', marginRight: '20px'}}>
                                 &#8377;{props.price}
                             </p>
