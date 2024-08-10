@@ -19,7 +19,8 @@
   margin-top: 50px;
 }
 .start-bg {
-  width: 100%;
+  width: 93%;
+  border-radius: 10px;
   height: 490px;
   position: relative;
   z-index: 2;
@@ -316,7 +317,38 @@ input[type="number"]::-webkit-outer-spin-button {
 .header-invoice {
   display: flex;
   justify-content: space-between;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 30px;
+  margin-right: 30px;
   margin-top: 25px;
+  width: 720px;
+}
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.order-card-header {
+  min-height: 200px;
+  width: 1100px;
+  margin: 40px 100px 0 100px;
+  padding: 32px 0 0 40px;
+}
+
+.blueDot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #2874f0;
+  border: 2px solid #2874f0;
+  display: inline-block;
+}
+.user-edit-link {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 32px;
+  text-decoration: none;
+  color: #2874f0;
+  cursor: pointer;
 }

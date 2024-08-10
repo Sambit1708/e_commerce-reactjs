@@ -26,7 +26,6 @@ const AuthButton = styled(Button)({
     }
 })
 
-
 const EditSizeButton = styled(Button)({
     boxShadow: 'none',
     textTransform: 'none',
@@ -50,4 +49,58 @@ const EditSizeButton = styled(Button)({
     }
 });
 
-export { AuthButton, EditSizeButton }
+const BuyNowButton = styled(Button)({
+  textTransform: 'uppercase',
+  fontSize: 16,
+  padding: '6px 12px',
+  border: '1px solid',
+  lineHeight: 1.5,
+  width: '100%',
+  height: "56px",
+  borderColor: '#fb641b',
+  backgroundColor: "#fb641b",
+  color: "#fff",
+  boxShadow: `none`,
+  fontFamily: [
+    'Poppins',
+    'sans-serif',
+  ].join(','),
+  '&:hover': {
+    backgroundColor: '#f85404',
+    borderColor: '#f85404',
+    boxShadow: 'none'
+  },
+  '&:active': {
+    boxShadow: `none`,
+    backgroundColor: '#ff9f00'
+  }
+});
+
+const AddToCartButton = styled(Button)({
+  width: '100%',
+  height: "56px",
+  textTransform: 'uppercase',
+  fontSize: 16,
+  padding: '6px 12px',
+  border: '1px solid',
+  lineHeight: 1.5,
+  borderColor: '#ff9f00',
+  backgroundColor: "#ff9f00",
+  color: "#fff",
+  boxShadow: `none`,
+  fontFamily: [
+    'Poppins',
+    'sans-serif',
+  ].join(','),
+  '&:hover': {
+    backgroundColor: '#eb9300',
+    borderColor: '#eb9300',
+    boxShadow: 'none'
+  },
+  '&:active': {
+    boxShadow: `none`,
+    backgroundColor: '#ff9f00'
+  }
+});
+
+export { AuthButton, EditSizeButton, BuyNowButton, AddToCartButton }

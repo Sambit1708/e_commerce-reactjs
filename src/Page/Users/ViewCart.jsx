@@ -9,6 +9,7 @@ import UserService from '../../Services/UserService';
 import Swal from 'sweetalert2';
 import LoginService from '../../Services/LoginService';
 import { useNavigate } from 'react-router-dom'
+import PreLoading from '../../Components/PreLoading'
 
 
 
@@ -45,6 +46,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const ViewCart = () => {
   const { cart } = useCartContext();
+  const [loading, setLoading] = React.useState(true)
   const [openQtyAlert, setOpenQtyAlert] = React.useState(false);
   const [openAddressAlert, setOpenAddressAlert] = React.useState(false);
   const [cartItems, setCartItems] = React.useState([]);
@@ -59,23 +61,13 @@ const ViewCart = () => {
   const checkCurrentUser = async () => {
     console.log(cart)
     if(await LoginService.isLoggedin()) {
-      var cartItemsResponse = [];
       try {
-        if(cart.length !== 0) {
-          const addToCartItems = {
-            productId: cart[0].productId,
-            productSizeId: cart[0].productSizeId,
-            quantity: 1
-          }
-          const cartResponse = await CartService.addToCart(addToCartItems);
-          console.log(cartResponse)
-          if(cartResponse.status === 201 || cartResponse.status === 200 ||cartResponse.status === 500 ) {
-            window.location.reload();
-          }
-        }
-        else {
-          cartItemsResponse = await CartService.getAllCartItem();
+        const cartItemsResponse = await CartService.getAllCartItem();
+        if(cartItemsResponse.status === 200) {
           setCartItems(cartItemsResponse.data);
+          setTimeout(()=>{
+            setLoading(false);
+          }, 100)
         }
         const addressResponse = await UserService.getCurrentAddress();
         const allAddressResponse = await UserService.getAllAddresses();
@@ -86,6 +78,9 @@ const ViewCart = () => {
           setAllAddress(allAddressResponse.data);
         }
       } catch (error) {
+        setTimeout(()=>{
+          setLoading(false);
+        }, 100)
       }
     }
   }
@@ -185,6 +180,17 @@ const ViewCart = () => {
   const vertical = 'bottom';
   const horizontal = 'center';
 
+  if(loading) {
+    return (
+      <Box>
+        <NavBar />
+        <Box sx={{ mt: "70px", bgcolor: '#f7f7ff', minHeight: 580}}>
+          <PreLoading />
+        </Box>
+      </Box>
+    )
+  }
+
   return (
     <Box>
       <NavBar />
@@ -226,22 +232,22 @@ const ViewCart = () => {
                                 <DialogContent>
                                   <FormControl>
                                     <RadioGroup
-                                      aria-labelledby="demo-radio-buttons-group-label"
+                                      aria-labelledby="address-label"
                                       defaultValue="address"
                                       name="radio-buttons-group"
                                     >
                                       {
                                         allAddress.length !== 0 &&
                                         allAddress.map((item, index) => (
-                                          <FormControlLabel key={index} value="address" control={<Radio />} label= {
+                                          <FormControlLabel sx={{ mt: 2 }} key={index} value={item.id} control={<Radio />} label= {
                                             <Box>
                                               <Box sx={{ display: "flex", alignItems: "center" }}>
                                                 <Typography fontFamily="poppins" fontWeight="500" fontSize="14px">
                                                   {item.deliverTo}, {item.pin}
                                                 </Typography>
                                               </Box>
-                                              <Box>
-                                                <Typography className='turncate' fontFamily="poppins" fontSize="13px" sx={{color: "grey", width: "410px"}}>
+                                              <Box sx={{ width: "410px" }}>
+                                                <Typography className='turncate' fontFamily="poppins" fontSize="13px" color="grey">
                                                   {item.address}
                                                 </Typography>
                                               </Box>
@@ -263,7 +269,6 @@ const ViewCart = () => {
                     <Card>
                       <CardContent>
                         {
-                          cartItems.length !== 0 && 
                           cartItems.sort((a,b) => new Date(b.updateDate) - new Date(a.updateDate))
                           .map((item, index) => (
                             <React.Fragment key={index}>

@@ -21,8 +21,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import "../Assets/style.css";
+import LoginService from "../Services/LoginService";
 import CartService from "../Services/CartService";
 import loginService from "../Services/LoginService";
 
@@ -83,7 +84,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBarUserMain = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState({ firstName: "Signin" });
   const [totalCartItems, setTotalCartItems] = React.useState(0);
@@ -92,7 +93,7 @@ const NavBar = () => {
   const searchRef = React.useRef();
 
   const userValidate = async () => {
-    const userResponse = await loginService.isLoggedin();
+    const userResponse = await LoginService.isLoggedin();
     if (userResponse) {
       var data = loginService.getCurrentUser();
       if (data != null) {
@@ -126,7 +127,7 @@ const NavBar = () => {
 
   return (
     <AppBar
-      sx={{ color: "black", background: "#2874f0", position: "fixed", top: 0 }}
+      sx={{ color: "black", background: "#fff", position: "fixed", top: 0 }}
       component="nav"
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -148,7 +149,7 @@ const NavBar = () => {
               variant="h6"
               component="div"
               fontFamily="poppins"
-              color="white"
+              // color="white"
             >
               E-Commerce
             </Typography>
@@ -160,6 +161,7 @@ const NavBar = () => {
                 display: "flex",
                 alignItems: "center",
                 width: 400,
+                border: "1px solid #d5d5d5",
               }}
             >
               <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
@@ -183,7 +185,7 @@ const NavBar = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             disableElevation
-            sx={{ color: "#fff", fontFamily: "poppins" }}
+            sx={{ color: "black", fontFamily: "poppins" }}
             onClick={
               loggedIn.firstName !== "Signin"
                 ? handleClick
@@ -236,7 +238,7 @@ const NavBar = () => {
                   style={{ textDecoration: "none", color: "black" }}
                   to={"/main"}
                   onClick={() => {
-                    loginService.logout();
+                    LoginService.logout();
                   }}
                 >
                   <MenuItem disableRipple>
@@ -253,18 +255,18 @@ const NavBar = () => {
               style={{ textDecoration: "none", color: "black" }}
               to={item.path}
             >
-              <Button sx={{ color: "#fff", fontFamily: "poppins" }}>
+              <Button sx={{ color: "black", fontFamily: "poppins" }}>
                 {item.title}
               </Button>
             </NavLink>
           ))}
           <IconButton aria-label="cart" onClick={() => navigate("/u/viewcart")}>
             <StyledBadge badgeContent={totalCartItems} color="error">
-              <ShoppingCartIcon style={{ color: "#fff" }} />
+              <ShoppingCartOutlinedIcon />
             </StyledBadge>
             <Typography
               fontFamily="poppins"
-              sx={{ ml: totalCartItems === 0 ? 1 : 2, color: "#fff" }}
+              sx={{ ml: totalCartItems === 0 ? 1 : 2, color: "black" }}
             >
               Cart
             </Typography>
@@ -275,4 +277,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarUserMain;

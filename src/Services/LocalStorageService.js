@@ -1,18 +1,16 @@
-
 class LocalStorageService {
-    
-    setItem(key, value) {
-        localStorage.setItem(key, JSON.stringify(value));
-    }
+  setItem(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
 
-    getItem(key) {
-        return JSON.parse(localStorage.getItem(key));
-    }
+  getItem(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
 
-    removeItem(key) {
-        localStorage.removeItem(key);
-    }
+  removeItem(key) {
+    localStorage.removeItem(key);
+  }
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default new LocalStorageService();
+const localStorageService = new LocalStorageService();
+export default localStorageService;

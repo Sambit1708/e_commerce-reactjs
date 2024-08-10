@@ -1,6 +1,6 @@
-import { Card, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material'
-import React from 'react'
-import Helper from '../Helper/Helper'
+import React from 'react';
+import { Card, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material';
+import Helper from '../Helper/Helper';
 
 const CardItem = (props) => (
     <Card key={props.title} sx={{ maxWidth: 230, cursor: 'pointer' }}>
@@ -55,4 +55,4 @@ const CardItemProductPage = (props) => (
     </React.Fragment>
 )
 
-export {CardItem, CardItemProductPage}
+export { CardItem, CardItemProductPage }

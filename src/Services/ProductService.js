@@ -6,6 +6,7 @@ const ADD_IMG = '/add-img';
 const ALL_PRODUCT = '/getAll';
 const UPDATE_SIZE = '/update-size';
 const UPDATE = '/update';
+const SIZE = '/sizes';
 
 const BY_OCCASION = '/by-occasion';
 const BY_IDEALFOR = '/by-idealFor';
@@ -88,6 +89,13 @@ class ProductService {
         return axios({
             method: 'get',
             url: `${PRODUCT}${BY_TYPE}`,
+        })
+    }
+
+    getProductSizeOfProduct(id) {
+        return axios({
+            method: 'get',
+            url: `${PRODUCT}${SIZE}/${id}`,
         })
     }
 }
